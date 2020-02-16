@@ -1,10 +1,11 @@
 const api = require('../api-variables').api;
 
-// const templatesList = [
-//   "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
-// ];
-const templatesList = ["Foot_and_Ankle_PROMs-v0"];
-
+/**
+ * Get the appropriate name for the given language for an object within the template tree, if provided. Otherwise return empty string.
+ * 
+ * @param {*} object 
+ * @param {*} language 
+ */
 const getLocalizedNameIfExists = (object, language) => {
   let name = '';
   if ("localizedNames" in object) {
@@ -21,6 +22,12 @@ const getLocalizedNameAndDescriptionIfExist = (object, language) => {
   return {name, description};
 }
 
+/**
+ * Get the appropriate description for the given language for an object within the template tree, if provided. Otherwise return empty string.
+ * 
+ * @param {*} object 
+ * @param {*} language 
+ */
 const getLocalizedDescriptionIfExists = (object, language) => {
   let description = '';
   if ("localizedDescriptions" in object) {
@@ -31,6 +38,11 @@ const getLocalizedDescriptionIfExists = (object, language) => {
   return description;
 }
 
+/**
+ * Generate a string that is as many tabs as specified by width (>= 0)
+ * 
+ * @param {*} width Integer greater than or equal to 0
+ */
 function tabs(width) {
   let tabString = '';
   for (i = 0; i < width; i++) {
@@ -51,7 +63,6 @@ function treeTrawl(tree, language, depth) {
 }
 
 exports.tabs = tabs;
-exports.templatesList = templatesList;
 exports.getLocalizedNameAndDescriptionIfExist = getLocalizedNameAndDescriptionIfExist;
 exports.api = api;
 exports.treeTrawl = treeTrawl;

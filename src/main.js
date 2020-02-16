@@ -1,4 +1,9 @@
-const { templatesList, api, treeTrawl, getLocalizedNameAndDescriptionIfExist } = require('./template.js')
+const { api, treeTrawl, getLocalizedNameAndDescriptionIfExist } = require('./template.js')
+
+// const templatesList = [
+//   "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
+// ];
+const templatesList = ["Foot_and_Ankle_PROMs-v0"];
 
 templatesList.map((templateName) => {
     const request = require('request');
