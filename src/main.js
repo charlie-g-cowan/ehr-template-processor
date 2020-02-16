@@ -1,4 +1,4 @@
-const { api, treeTrawl, getLocalizedNameAndDescriptionIfExist } = require('./template.js')
+const { api, treeTrawl, getLocalizedNameIfExists, getLocalizedDescriptionIfExists } = require('./template.js')
 
 // const templatesList = [
 //   "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
@@ -26,7 +26,7 @@ templatesList.map((templateName) => {
       let language = template.defaultLanguage;
       let tree = template.tree;
       let name = getLocalizedNameIfExists(tree, language);
-      let description = getLocalizedNameIfExists(tree, language);
+      let description = getLocalizedDescriptionIfExists(tree, language);
       let questions = tree.children;
       // console.log(name);
       // console.log(description);

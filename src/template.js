@@ -47,7 +47,7 @@ function tabs(width) {
 
 function treeTrawl(tree, language, depth) {
   let name = getLocalizedNameIfExists(tree, language);
-  let description = getLocalizedNameIfExists(tree, language);
+  let description = getLocalizedDescriptionIfExists(tree, language);
   let id = 'id' in tree ? tree.id : '';
   console.log(tabs(depth) + id + ': ' + name + ', ' + description);
   if ('children' in tree) {
