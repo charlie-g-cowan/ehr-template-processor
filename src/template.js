@@ -16,12 +16,6 @@ const getLocalizedNameIfExists = (object, language) => {
   return name;
 }
 
-const getLocalizedNameAndDescriptionIfExist = (object, language) => { 
-  const name = getLocalizedNameIfExists(object, language);
-  const description = getLocalizedDescriptionIfExists(object, language);
-  return {name, description};
-}
-
 /**
  * Get the appropriate description for the given language for an object within the template tree, if provided. Otherwise return empty string.
  * 
@@ -64,7 +58,6 @@ function treeTrawl(tree, language, depth) {
 }
 
 exports.tabs = tabs;
-exports.getLocalizedNameAndDescriptionIfExist = getLocalizedNameAndDescriptionIfExist;
 exports.api = api;
 exports.treeTrawl = treeTrawl;
 exports.getLocalizedNameIfExists = getLocalizedNameIfExists;
