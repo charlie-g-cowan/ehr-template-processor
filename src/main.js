@@ -25,7 +25,8 @@ templatesList.map((templateName) => {
       let template = result.webTemplate;
       let language = template.defaultLanguage;
       let tree = template.tree;
-      let {name, description} = getLocalizedNameAndDescriptionIfExist(tree, language);
+      let name = getLocalizedNameIfExists(tree, language);
+      let description = getLocalizedNameIfExists(tree, language);
       let questions = tree.children;
       // console.log(name);
       // console.log(description);
