@@ -1,0 +1,25 @@
+{
+  "name": "ehr-template-processor",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/template.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlie-g-cowan/ehr-template-processor.git"
+  },
+  "author": "Charlie Cowan",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/charlie-g-cowan/ehr-template-processor/issues"
+  },
+  "homepage": "https://github.com/charlie-g-cowan/ehr-template-processor#readme",
+  "devDependencies": {
+    "mocha": "^7.0.1"
+  }
+}
