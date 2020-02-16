@@ -5,20 +5,30 @@ const api = require('../api-variables').api;
 // ];
 const templatesList = ["Foot_and_Ankle_PROMs-v0"];
 
-const getLocalizedNameAndDescriptionIfExist = (object, language) => {
+const getLocalizedNameIfExists = (object, language) => {
   let name = '';
-  let description = '';
   if ("localizedNames" in object) {
     if (language in object.localizedNames) {
       name = object.localizedNames[language];
     }
   }
+  return name;
+}
+
+const getLocalizedNameAndDescriptionIfExist = (object, language) => { 
+  const name = getLocalizedNameIfExists(object, language);
+  const description = getLocalizedDescriptionIfExists(object, language);
+  return {name, description};
+}
+
+const getLocalizedDescriptionIfExists = (object, language) => {
+  let description = '';
   if ("localizedDescriptions" in object) {
     if (language in object.localizedDescriptions) {
       description = object.localizedDescriptions[language];
     }
   }
-  return {name, description};
+  return description;
 }
 
 function tabs(width) {
@@ -45,3 +55,5 @@ exports.templatesList = templatesList;
 exports.getLocalizedNameAndDescriptionIfExist = getLocalizedNameAndDescriptionIfExist;
 exports.api = api;
 exports.treeTrawl = treeTrawl;
+exports.getLocalizedNameIfExists = getLocalizedNameIfExists;
+exports.getLocalizedDescriptionIfExists = getLocalizedDescriptionIfExists;
