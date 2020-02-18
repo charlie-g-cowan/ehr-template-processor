@@ -12,12 +12,7 @@ const api = require('../api-variables').api;
  * @param {*} language 
  */
 const getLocalizedNameIfExists = (object, language) => {
-  if ("localizedNames" in object) {
-    if (language in object.localizedNames) {
-      return object.localizedNames[language];
-    }
-  }
-  return '';
+  return ("localizedNames" in object) ? (language in object.localizedNames ? object.localizedNames[language] : '') : ''
 }
 
 /**
@@ -27,12 +22,8 @@ const getLocalizedNameIfExists = (object, language) => {
  * @param {*} language 
  */
 const getLocalizedDescriptionIfExists = (object, language) => {
-  if ("localizedDescriptions" in object) {
-    if (language in object.localizedDescriptions) {
-      return object.localizedDescriptions[language];
-    }
-  }
-  return '';
+  return ("localizedDescriptions" in object) ? (language in object.localizedDescriptions ? object.localizedDescriptions[language] : '') : ''
+
 }
 
 /**
