@@ -87,7 +87,7 @@ function logLocationInTree(depth, id, name, description, parentTrace) {
 }
 
 /**
- * Trawl recursively throuhg a JSON webTemplate by getitng the top level element and seeing whether it has a children element, then iterating through those with the same function
+ * Trawl recursively through a JSON webTemplate by getitng the top level element and seeing whether it has a children element, then iterating through those with the same function
  * @param {*} tree 
  * @param {*} language 
  * @param {*} depth 

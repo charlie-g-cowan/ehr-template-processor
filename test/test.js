@@ -17,7 +17,7 @@ describe('tabs', function() {
 });
 
 describe('getting names', function() {
-    it('should return nothing if no localizedNames object exists', function() {
+    it('should return empty string if no localizedNames object exists', function() {
         const object = {
             name: "UCLH Foot and ankle PROMs",
             localizedName: "UCLH Foot and ankle PROMs",
@@ -26,7 +26,7 @@ describe('getting names', function() {
         const language = 'en';
         assert.equal(getLocalizedNameIfExists(object, language), '');
     });
-    it('should return nothing if language does not exist within localizedNames', function() {
+    it('should return empty string if language does not exist within localizedNames', function() {
         const object = {
             name: "UCLH Foot and ankle PROMs",
             localizedName: "UCLH Foot and ankle PROMs",
@@ -50,7 +50,7 @@ describe('getting names', function() {
 
 
 describe('getting descriptions', function() {
-    it('should return nothing if no localizedDescriptions object exists', function() {
+    it('should return empty string if no localizedDescriptions object exists', function() {
         const object = {
             name: "UCLH Foot and ankle PROMs",
             localizedName: "UCLH Foot and ankle PROMs",
@@ -59,7 +59,7 @@ describe('getting descriptions', function() {
         const language = 'en';
         assert.equal(getLocalizedDescriptionIfExists(object, language), '');
     });
-    it('should return nothing if language does not exist within localizedDescriptions', function() {
+    it('should return empty string if language does not exist within localizedDescriptions', function() {
         const object = {
             name: "UCLH Foot and ankle PROMs",
             localizedName: "UCLH Foot and ankle PROMs",
@@ -80,7 +80,6 @@ describe('getting descriptions', function() {
         assert.equal(getLocalizedDescriptionIfExists(object, language), "Document to communicate information to others, commonly in response to a request from another party.");
     });
 });
-
 
 
 const object = {
