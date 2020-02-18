@@ -108,4 +108,4 @@ exports.api = api;
 exports.treeTrawl = treeTrawl;
 exports.getLocalizedNameIfExists = getLocalizedNameIfExists;
 exports.getLocalizedDescriptionIfExists = getLocalizedDescriptionIfExists;
-
+exports.getIdIfExists = getIdIfExists

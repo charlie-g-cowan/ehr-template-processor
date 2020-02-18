@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { tabs, getLocalizedNameIfExists, getLocalizedDescriptionIfExists } = require('../src/template.js');
+const { tabs, getLocalizedNameIfExists, getLocalizedDescriptionIfExists, getIdIfExists } = require('../src/template.js');
 
 describe('tabs', function() {
     it('should return an empty string when argument is 0', function() {
@@ -81,6 +81,32 @@ describe('getting descriptions', function() {
     });
 });
 
+describe('getting id', function() {
+    it('should return id string value if id object exists', function() {
+        const object = {
+            name: "UCLH Foot and ankle PROMs",
+            localizedName: "UCLH Foot and ankle PROMs",
+            id: "test-id-string"
+        };
+        assert.equal(getIdIfExists(object), 'test-id-string');
+    });
+    it('should return empty string if id object does not exist', function() {
+        const object = {
+            name: "UCLH Foot and ankle PROMs",
+            localizedName: "UCLH Foot and ankle PROMs",
+        };
+        assert.equal(getIdIfExists(object), '');
+    });
+    it('should return empty string if id object exists and is empty string', function() {
+        const object = {
+            name: "UCLH Foot and ankle PROMs",
+            localizedName: "UCLH Foot and ankle PROMs",
+            id: ""
+        };
+        const language = 'en';
+        assert.equal(getIdIfExists(object, language), '');
+    });
+});
 
 const object = {
     name: "UCLH Foot and ankle PROMs",
