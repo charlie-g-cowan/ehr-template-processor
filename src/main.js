@@ -1,3 +1,8 @@
+/**
+ * @file Temporary file for running template functions
+ * @author Charlie Cowan <charlie.g.cowan@gmail.com>
+ */
+
 const { api, treeTrawl, getLocalizedNameIfExists, getLocalizedDescriptionIfExists } = require('./template.js')
 
 // const templatesList = [
@@ -25,14 +30,8 @@ templatesList.map((templateName) => {
       let template = result.webTemplate;
       let language = template.defaultLanguage;
       let tree = template.tree;
-      let name = getLocalizedNameIfExists(tree, language);
-      let description = getLocalizedDescriptionIfExists(tree, language);
-      let questions = tree.children;
-      // console.log(name);
-      // console.log(description);
-      // console.log(questions);
-      treeTrawl(tree, language, 0);
-      //END PROCESSING TEST
+      treeTrawl(tree, language, 0, []);
       console.log();
+      //END PROCESSING TEST
     });
   });
