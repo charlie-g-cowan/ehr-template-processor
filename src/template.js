@@ -82,15 +82,22 @@ function getIdIfExists(tree) {
  * @param {*} name 
  * @param {*} description 
  */
-function logLocationInTree(depth, id, name, description) {
-  console.log(tabs(depth) + id + ': ' + name + ', ' + description);
+function logLocationInTree(depth, id, name, description, parentTrace) {
+  console.log(tabs(depth) + id + ': ' + name + ', ' + parentTrace.join('/') + '/' + id);
 }
 
+/**
+ * Trawl recursively throuhg a JSON webTemplate by getitng the top level element and seeing whether it has a children element, then iterating through those with the same function
+ * @param {*} tree 
+ * @param {*} language 
+ * @param {*} depth 
+ * @param {*} parentTrace 
+ */
 function treeTrawl(tree, language, depth, parentTrace) {
   let name = getLocalizedNameIfExists(tree, language);
   let description = getLocalizedDescriptionIfExists(tree, language);
   let id = getIdIfExists(tree);
-  logLocationInTree(depth, id, name, parentTrace);
+  logLocationInTree(depth, id, name, description, parentTrace);
   trawlChildrenIfExist(tree, language, depth, parentTrace.concat([id]));
 }
 
