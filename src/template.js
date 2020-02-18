@@ -12,13 +12,12 @@ const api = require('../api-variables').api;
  * @param {*} language 
  */
 const getLocalizedNameIfExists = (object, language) => {
-  let name = '';
   if ("localizedNames" in object) {
     if (language in object.localizedNames) {
-      name = object.localizedNames[language];
+      return object.localizedNames[language];
     }
   }
-  return name;
+  return '';
 }
 
 /**
@@ -28,13 +27,12 @@ const getLocalizedNameIfExists = (object, language) => {
  * @param {*} language 
  */
 const getLocalizedDescriptionIfExists = (object, language) => {
-  let description = '';
   if ("localizedDescriptions" in object) {
     if (language in object.localizedDescriptions) {
-      description = object.localizedDescriptions[language];
+      return object.localizedDescriptions[language];
     }
   }
-  return description;
+  return '';
 }
 
 /**
@@ -65,7 +63,6 @@ function trawlChildrenIfExist(tree, language, depth, parentTrace) {
   }
 }
 
-// TODO: Test this
 /**
  * If the current subtree has an id attribute in the JSON, then return it. Otherwise return empty string.
  * @param {*} tree 
