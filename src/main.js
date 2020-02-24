@@ -3,12 +3,13 @@
  * @author Charlie Cowan <charlie.g.cowan@gmail.com>
  */
 
-const { api, treeTrawl, getLocalizedNameIfExists, getLocalizedDescriptionIfExists } = require('./template.js')
+const { api, treeTrawlGettingFlatInputs, getLocalizedNameIfExists, getLocalizedDescriptionIfExists, inputToJsonFormInput, trawlChildrenIfExist } = require('./template.js')
 
 // const templatesList = [
 //   "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
 // ];
 const templatesList = ["Foot_and_Ankle_PROMs-v0"];
+
 
 templatesList.map((templateName) => {
     const request = require('request');
@@ -24,14 +25,17 @@ templatesList.map((templateName) => {
     request(options, function (error, response) { 
       if (error) throw new Error(error);
       const result = JSON.parse(response.body);
-      
       //BEGIN PROCESSING TEST
       // console.log(result);
       let template = result.webTemplate;
       let language = template.defaultLanguage;
       let tree = template.tree;
-      treeTrawl(tree, language, 0, []);
-      console.log();
+
+      // console.log(treeTrawlGettingFlatInputs(tree, language, 0, [], []));
+      // treeTrawlGettingFlatInputs(tree, language, 0, [], []).map((input) => {
+      //   console.log(inputToJsonFormInput(input, language));
+      // });
+      // console.log();
       //END PROCESSING TEST
     });
   });
