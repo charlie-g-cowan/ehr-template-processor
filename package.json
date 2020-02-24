@@ -7,8 +7,9 @@
     "test": "test"
   },
   "scripts": {
+    "start": "node src/main.js",
     "test": "mocha",
-    "start": "node src/main.js"
+    "coverage": "nyc mocha"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/charlie-g-cowan/ehr-template-processor#readme",
   "devDependencies": {
-    "mocha": "^7.0.1"
+    "mocha": "^7.0.1",
+    "nyc": "^15.0.0"
   }
 }
