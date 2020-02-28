@@ -16,7 +16,7 @@
     "url": "git+https://github.com/charlie-g-cowan/ehr-template-processor.git"
   },
   "author": "Charlie Cowan",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/charlie-g-cowan/ehr-template-processor/issues"
   },
