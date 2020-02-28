@@ -5,10 +5,10 @@
 
 const { api, treeTrawlGettingFlatInputs, getLocalizedNameIfExists, getLocalizedDescriptionIfExists, inputToJsonFormInput, trawlChildrenIfExist } = require('./template.js')
 
-// const templatesList = [
-//   "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
-// ];
-const templatesList = ["Foot_and_Ankle_PROMs-v0"];
+const templatesList = [
+  "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
+];
+// const templatesList = ["Foot_and_Ankle_PROMs-v0"];
 
 templatesList.map((templateName) => {
     const request = require('request');
@@ -32,9 +32,10 @@ templatesList.map((templateName) => {
       const result1 = [];
       // console.log(treeTrawlGettingFlatInputs(tree, language, [], []));
       treeTrawlGettingFlatInputs(tree, language, [], []).map((input) => {
-        console.log(inputToJsonFormInput(input, language));
+        // console.log(inputToJsonFormInput(input, language));
         result1.push(inputToJsonFormInput(input, language));
       });
+      console.log();
       console.log(JSON.stringify(result1));
       //END PROCESSING TEST
     });

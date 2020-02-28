@@ -134,10 +134,12 @@ function inputToJsonFormInput(totalTree, language) {
         case 'CODED_TEXT':
         returnObject.name = returnObject.name + "|code";
         returnObject.type = 'options';
-        returnObject.inputOptions = input.list.map((input) => ({
-          value: input.value,
-          label: input.label
-        }));
+        if ('list' in input) { 
+          returnObject.inputOptions = input.list.map((input) => ({
+            value: input.value,
+            label: input.label
+          }));
+        }
         break;
         case 'BOOLEAN':
         returnObject.type = 'boolean';
