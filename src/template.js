@@ -42,7 +42,7 @@ const getLocalizedDescriptionIfExists = (object, language) => {
 */
 function padNTabsLeft(width) {
   let tabString = '';
-  for (i = 0; i < width; i++) {
+  for (let i = 0; i < width; i++) {
     tabString += '\t';
   }
   return tabString;
