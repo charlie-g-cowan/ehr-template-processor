@@ -10,7 +10,6 @@ const { api, treeTrawlGettingFlatInputs, getLocalizedNameIfExists, getLocalizedD
 // ];
 const templatesList = ["Foot_and_Ankle_PROMs-v0"];
 
-
 templatesList.map((templateName) => {
     const request = require('request');
     const options = {
@@ -30,12 +29,13 @@ templatesList.map((templateName) => {
       let template = result.webTemplate;
       let language = template.defaultLanguage;
       let tree = template.tree;
-
-      // console.log(treeTrawlGettingFlatInputs(tree, language, 0, [], []));
-      // treeTrawlGettingFlatInputs(tree, language, 0, [], []).map((input) => {
-      //   console.log(inputToJsonFormInput(input, language));
-      // });
-      // console.log();
+      const result1 = [];
+      // console.log(treeTrawlGettingFlatInputs(tree, language, [], []));
+      treeTrawlGettingFlatInputs(tree, language, [], []).map((input) => {
+        console.log(inputToJsonFormInput(input, language));
+        result1.push(inputToJsonFormInput(input, language));
+      });
+      console.log(JSON.stringify(result1));
       //END PROCESSING TEST
     });
   });
