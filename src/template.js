@@ -2,7 +2,6 @@
 * @file Provides functions for pulling webTemplate and processing it
 * @author Charlie Cowan <charlie.g.cowan@gmail.com>
 */
-
 const api = require('../api-variables').api;
 
 /**
@@ -105,70 +104,95 @@ function debugTreeTrawlLogAll(tree, language, depth, parentTrace, inputs) {
   }
 }
 
+/**
+* convert a tree (with inputs) from a webTemplate into an input, in a json representation
+* @param {*} totalTree 
+* @param {*} language 
+*/
 function inputToJsonFormInput(totalTree, language) {
   const tree = totalTree.inputs;
+  let returnObject = {};
   if (objectHasInputs(tree)) {
-    return tree.inputs.map((input) => {
+    tree.inputs.map((input) => {
       const typeFromInput = input.type;
-      const returnObject = {
+      returnObject = {
         name: totalTree.aqlTrace,
-        key: tree.id,
+        // key: tree.id,
+        key: totalTree.aqlTrace,
         label: getLocalizedNameIfExists(tree, language),
         help: getLocalizedDescriptionIfExists(tree, language),
+      }
+      //TODO: look into this
+      if ('inContext' in tree) {
+        if (tree.inContext) {
+          returnObject.label = tree.name == undefined ? (tree.id == undefined ? '[no name found]' : tree.id) : tree.name;
+          returnObject.help = "Contextual value";
+        }
       }
       // TODO: for all, required field
       switch(typeFromInput) {
         case 'CODED_TEXT':
-          const radioOptions = input.list.map((input) => ({
+        returnObject.name = returnObject.name + "|code";
+        returnObject.type = 'options';
+        returnObject.inputOptions = input.list.map((input) => ({
+          value: input.value,
+          label: input.label
+        }));
+        break;
+        case 'BOOLEAN':
+        returnObject.type = 'boolean';
+        returnObject.disabledValues = []; // e.g. true, false // TODO: implement this
+        // TODO: default value
+        break;
+        case 'TEXT':
+        // TODO: implement suffixes, suggested values, terminology,
+        if ('list' in input) {
+          returnObject.inputOptions = input.list.map((input) => ({
             value: input.value,
             label: input.label
           }));
-          returnObject.name = returnObject.name + "|code";
-          returnObject.type = 'options';
-          returnObject.radioOptions = {radioOptions};
-        break;
-        case 'BOOLEAN':
-          returnObject.type = 'boolean';
-          returnObject.disabledValues = []; // e.g. true, false // TODO: implement this
-          // TODO: default value
-        break;
-        case 'TEXT':
-          // TODO: implement suffixes, suggested values, terminology,
-          returnObject.type = 'text';
+        }
+        returnObject.suggestions = 'list' in input;
+        returnObject.type = 'text';
+        if ("listOpen" in input) {
+          returnObject.allowFreeText = input.listOpen;
+        } else {
+          returnObject.allowFreeText = true;
+        }
         break;
         case 'INTEGER':
-          returnObject.type = 'number';
-          returnObject.nubmerType = 'integer';
-          // TODO: implement validation, max, min, step etc.
+        returnObject.type = 'number';
+        returnObject.numberType = 'integer';
+        // TODO: implement validation, max, min, step etc.
         break;
         case 'DECIMAL':
-          returnObject.type = 'number';
-          returnObject.nubmerType = 'decimal';
-          // TODO: implement validation, max, min, precision etc.
+        returnObject.type = 'number';
+        returnObject.numberType = 'decimal';
+        // TODO: implement validation, max, min, precision etc.
         break;
         case 'DATE':
-          returnObject.type = 'date';
-          // TODO: implement pattern validation
+        returnObject.type = 'date';
+        // TODO: implement pattern validation
         break;
         case 'DATETIME':
-          returnObject.type = 'datetime';
-          break;
+        returnObject.type = 'datetime';
+        break;
         case 'NONE':
-          returnObject.type = 'text';
+        returnObject.type = 'text';
         break;
         default:
-          returnObject.type = 'text';
+        returnObject.type = 'text';
         break;
       }
-      return returnObject;
-    })
+    });
+    return returnObject;
   }
 }
 
 /**
- * Returns whether a JSON tree has a 'children' element on its top level
- * @param {*} tree 
- */
+* Returns whether a JSON tree has a 'children' element on its top level
+* @param {*} tree 
+*/
 function hasChildren(tree) {
   return 'children' in tree;
 }
