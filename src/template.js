@@ -2,7 +2,7 @@
 * @file Provides functions for pulling webTemplate and processing it
 * @author Charlie Cowan <charlie.g.cowan@gmail.com>
 */
-const api = require('../api-variables').api;
+const environment = require("./environment");
 
 /**
 * Get the value of an object property if it exists. Otherwsie return empty string.
@@ -16,7 +16,7 @@ const getObjectPropertyIfExists = (object, propertyName) => {
 
 /**
 * Get the appropriate name for the given language for an object within the template tree, if provided. Otherwise return empty string.
-* 
+*
 * @param {*} object
 * @param {*} language
 */
@@ -219,7 +219,7 @@ function treeTrawlGettingFlatInputs(tree, language, parentTrace, inputs) {
 }
 
 exports.padNTabsLeft = padNTabsLeft;
-exports.api = api;
+exports.environment = environment;
 exports.treeTrawlGettingFlatInputs = treeTrawlGettingFlatInputs;
 exports.getLocalizedNameIfExists = getLocalizedNameIfExists;
 exports.getLocalizedDescriptionIfExists = getLocalizedDescriptionIfExists;
