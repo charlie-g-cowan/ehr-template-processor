@@ -6,9 +6,9 @@ const api = require('../api-variables').api;
 
 /**
 * Get the value of an object property if it exists. Otherwsie return empty string.
-* 
-* @param {*} object 
-* @param {*} propertyName 
+*
+* @param {*} object
+* @param {*} propertyName
 */
 const getObjectPropertyIfExists = (object, propertyName) => {
   return propertyName in object ? object[propertyName] : ''
@@ -17,8 +17,8 @@ const getObjectPropertyIfExists = (object, propertyName) => {
 /**
 * Get the appropriate name for the given language for an object within the template tree, if provided. Otherwise return empty string.
 * 
-* @param {*} object 
-* @param {*} language 
+* @param {*} object
+* @param {*} language
 */
 const getLocalizedNameIfExists = (object, language) => {
   return ("localizedNames" in object) ? (getObjectPropertyIfExists(object.localizedNames, language)) : ''
@@ -26,18 +26,18 @@ const getLocalizedNameIfExists = (object, language) => {
 
 /**
 * Get the appropriate description for the given language for an object within the template tree, if provided. Otherwise return empty string.
-* 
-* @param {*} object 
-* @param {*} language 
+*
+* @param {*} object
+* @param {*} language
 */
 const getLocalizedDescriptionIfExists = (object, language) => {
   return ("localizedDescriptions" in object) ? (getObjectPropertyIfExists(object.localizedDescriptions, language)) : ''
-  
+
 }
 
 /**
 * Generate a string that is as many tabs as specified by width (>= 0)
-* 
+*
 * @param {*} width Integer greater than or equal to 0
 */
 function padNTabsLeft(width) {
@@ -50,7 +50,7 @@ function padNTabsLeft(width) {
 
 /**
 * If the current subtree has an id attribute in the JSON, then return it. Otherwise return empty string.
-* @param {*} tree 
+* @param {*} tree
 */
 function getIdIfExists(tree) {
   return getObjectPropertyIfExists(tree, 'id');
@@ -59,10 +59,10 @@ function getIdIfExists(tree) {
 //TODO: Test this
 /**
 * Log to console the details of the part of the JSON tree currently being processed
-* @param {*} depth 
-* @param {*} id 
-* @param {*} name 
-* @param {*} description 
+* @param {*} depth
+* @param {*} id
+* @param {*} name
+* @param {*} description
 */
 function locationInTree(depth, id, name, description, parentTrace) {
   return padNTabsLeft(depth) + id + ': ' + name + ', ' + ', ' + description + ', ' + getAqlPathFromParentTrace(parentTrace, id);
@@ -70,8 +70,8 @@ function locationInTree(depth, id, name, description, parentTrace) {
 
 /**
 * Get path to write composition to from parent list and object id
-* @param {*} parentTrace 
-* @param {*} id 
+* @param {*} parentTrace
+* @param {*} id
 */
 function getAqlPathFromParentTrace(parentTrace = [], id = '') {
   return parentTrace.concat([id]).filter((e) => { return e != '' }).join('/');
@@ -79,7 +79,7 @@ function getAqlPathFromParentTrace(parentTrace = [], id = '') {
 
 /**
 * Return true if an object has an 'inputs' attribute, false otherwise
-* @param {*} object 
+* @param {*} object
 */
 function objectHasInputs(object) {
   return 'inputs' in object;
@@ -87,10 +87,10 @@ function objectHasInputs(object) {
 
 /**
 * Trawl recursively through a JSON webTemplate by getitng the top level element and seeing whether it has a children element, then iterating through those with the same function, logging each time
-* @param {*} tree 
-* @param {*} language 
-* @param {*} depth 
-* @param {*} parentTrace 
+* @param {*} tree
+* @param {*} language
+* @param {*} depth
+* @param {*} parentTrace
 */
 function debugTreeTrawlLogAll(tree, language, depth, parentTrace, inputs) {
   let name = getLocalizedNameIfExists(tree, language);
@@ -106,8 +106,8 @@ function debugTreeTrawlLogAll(tree, language, depth, parentTrace, inputs) {
 
 /**
 * convert a tree (with inputs) from a webTemplate into an input, in a json representation
-* @param {*} totalTree 
-* @param {*} language 
+* @param {*} totalTree
+* @param {*} language
 */
 function inputToJsonFormInput(totalTree, language) {
   const tree = totalTree.inputs;
@@ -134,7 +134,7 @@ function inputToJsonFormInput(totalTree, language) {
         case 'CODED_TEXT':
         returnObject.name = returnObject.name + "|code";
         returnObject.type = 'options';
-        if ('list' in input) { 
+        if ('list' in input) {
           returnObject.inputOptions = input.list.map((input) => ({
             value: input.value,
             label: input.label
@@ -193,7 +193,7 @@ function inputToJsonFormInput(totalTree, language) {
 
 /**
 * Returns whether a JSON tree has a 'children' element on its top level
-* @param {*} tree 
+* @param {*} tree
 */
 function hasChildren(tree) {
   return 'children' in tree;
@@ -201,9 +201,9 @@ function hasChildren(tree) {
 
 /**
 * Trawl recursively through a JSON webTemplate by getting the top level element and seeing whether it has a children element, then iterating through those with the same function, getting flat list of inputs
-* @param {*} tree 
-* @param {*} language 
-* @param {*} parentTrace 
+* @param {*} tree
+* @param {*} language
+* @param {*} parentTrace
 */
 function treeTrawlGettingFlatInputs(tree, language, parentTrace, inputs) {
   let id = getIdIfExists(tree);
