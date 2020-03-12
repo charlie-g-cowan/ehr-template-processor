@@ -3,12 +3,13 @@
  * @author Charlie Cowan <charlie.g.cowan@gmail.com>
  */
 
-const { environment, treeTrawlGettingFlatInputs, getLocalizedNameIfExists, getLocalizedDescriptionIfExists, inputToJsonFormInput, trawlChildrenIfExist } = require('./template.js')
+const { environment, treeTrawlGettingFlatInputs, getLocalizedNameIfExists, getLocalizedDescriptionIfExists, inputToJsonFormInput, trawlChildrenIfExist } = require('./template.js');
 
-const templatesList = [
-  "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
-];
+// const templatesList = [
+//   "Foot_and_Ankle_PROMs-v0","Foot_and_Ankle_PROMs-v0-copy","IDCR Allergies List.v0","IDCR - Laboratory Order.v0","IDCR - Laboratory Test Report.v0","IDCR Problem List.v1","IDCR Procedures List.v0","NWIS - Medication Dispensation","RESET - Assessment E.v1","Vital Signs Encounter (Composition)"
+// ];
 // const templatesList = ["Foot_and_Ankle_PROMs-v0"];
+const templatesList = ["WHO - Suspected Covid-19 assessment.v0"];
 
 templatesList.map((templateName) => {
     const request = require('request');
