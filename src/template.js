@@ -121,7 +121,7 @@ function inputToJsonFormInput(totalTree, language) {
         key: totalTree.aqlTrace,
         label: getLocalizedNameIfExists(tree, language),
         help: getLocalizedDescriptionIfExists(tree, language),
-      }
+      };
       //TODO: look into this
       if ('inContext' in tree) {
         if (tree.inContext) {
@@ -218,6 +218,22 @@ function treeTrawlGettingFlatInputs(tree, language, parentTrace, inputs) {
   return inputs;
 }
 
+function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
+  const resultTree = {};
+  resultTree.id = tree.id;
+  resultTree.name = getLocalizedNameIfExists(tree, language);
+  if (objectHasInputs(tree)) {
+    resultTree.inputs = inputToJsonFormInput({inputs: tree, aqlTrace: getAqlPathFromParentTrace(parentTrace, tree.id)}, 'en');
+    resultTree.aqlTrace = getAqlPathFromParentTrace(parentTrace, tree.id);
+  }
+  if (hasChildren(tree)) {
+    resultTree.children = tree.children.map((childTree) => {
+      return treeTrawlGettingStructuredInputs(childTree, language, parentTrace.concat([tree.id]));
+    });
+  }
+  return resultTree;
+}
+
 exports.padNTabsLeft = padNTabsLeft;
 exports.environment = environment;
 exports.treeTrawlGettingFlatInputs = treeTrawlGettingFlatInputs;
@@ -227,3 +243,4 @@ exports.getIdIfExists = getIdIfExists;
 exports.objectHasInputs = objectHasInputs;
 exports.inputToJsonFormInput = inputToJsonFormInput;
 exports.getAqlPathFromParentTrace = getAqlPathFromParentTrace;
+exports.treeTrawlGettingStructuredInputs = treeTrawlGettingStructuredInputs;
