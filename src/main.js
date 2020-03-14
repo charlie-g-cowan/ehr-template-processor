@@ -50,11 +50,11 @@ templatesList.map((templateName) => {
         let template = result.webTemplate;
         let language = template.defaultLanguage;
         let tree = template.tree;
-        console.log(JSON.stringify(tree));
+        // console.log(JSON.stringify(tree));
         // console.log(JSON.stringify(tree, null, 2));
         // console.log(tree);
         // structuredTrawlTest(tree, language);
-        // flatTrawlTest(tree, language);
+        flatTrawlTest(tree, language);
         //END PROCESSING TEST
     });
 });
