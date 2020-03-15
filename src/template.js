@@ -2,7 +2,7 @@
  * @file Provides functions for pulling webTemplate and processing it
  * @author Charlie Cowan <charlie.g.cowan@gmail.com>
  */
-const { environment } = require("../api-variables");
+const { environment } = require("./environment");
 
 /**
  * Get the value of an object property if it exists. Otherwsie return empty string.
