@@ -1,2 +1,4 @@
 api-variables.js
 node_modules/
+.idea/
+.nyc_output/
