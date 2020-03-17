@@ -22,7 +22,7 @@ const getObjectPropertyIfExists = (object, propertyName) => {
  * @param {*} language
  */
 const getLocalizedNameIfExists = (object, language) => {
-    return ("localizedNames" in object) ? (getObjectPropertyIfExists(object.localizedNames, language)) : ''
+    return ("localizedNames" in object) ? (getObjectPropertyIfExists(object.localizedNames, language)) : (getObjectPropertyIfExists(object, 'name'));
 }
 
 /**
@@ -34,8 +34,7 @@ const getLocalizedNameIfExists = (object, language) => {
  */
 const getLocalizedDescriptionIfExists = (object, language) => {
     return ("localizedDescriptions" in object) ? (getObjectPropertyIfExists(object.localizedDescriptions, language)) :
-        ''
-
+        (getObjectPropertyIfExists(object, 'description'));
 }
 
 /**
@@ -141,6 +140,7 @@ function inputToJsonFormInput(totalTree, language) {
                     returnObject.label =
                         tree.name == undefined ? (tree.id == undefined ? '[no name found]' : tree.id) : tree.name;
                     returnObject.help = "Contextual value";
+                    returnObject.contextual = true;
                 }
             }
             // TODO: for all, required field
@@ -264,6 +264,9 @@ function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
         resultTree.children = tree.children.map((childTree) => {
             return treeTrawlGettingStructuredInputs(childTree, language, parentTrace.concat([tree.id]));
         });
+    }
+    if (tree.inContext) {
+        resultTree.contextual = true;
     }
     return resultTree;
 }
