@@ -1,6 +1,6 @@
 # EHR Template Processor
 
-This module takes a [webTemplate in Think!EHR[(https://gitlab.better.care/better-docs/tools-docs/blob/master/form-specification/form-specification.adoc)] style of a template based on the openEHR standard, and converts it into simplified JSON that represents the key data needed to represent that template as inputs (e.g. in HTML, in an app).
+This module takes a [webTemplate (in Think!EHR style)](https://gitlab.better.care/better-docs/tools-docs/blob/master/form-specification/form-specification.adoc) of a template based on the openEHR standard, and converts it into simplified JSON that represents the key data needed to represent that template as inputs (e.g. in HTML, in an app).
 
 ## Installation
 Simply clone (or add as submodule), and run `npm install`.
