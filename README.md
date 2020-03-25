@@ -42,12 +42,12 @@ Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/templat
 ```
 
 #### <a id="inputToJsonFormInput">inputToJsonFormInput(tree, language)</a>
-#####Arguments:
+##### Arguments:
 1. `tree`: a JSON tree that represents a node in a webTemplate, anywhere in the tree
 2. `language`:  an ISO language that is supported by that webTemplate e.g. 'en', 'fr'
-#####Returns:
+##### Returns:
 A JSON object that represent the input associated with the JSON tree that is passed in (e.g. based on the **inputs** property). Ignores any children of the tree, they must be processed seperately
-#####Example:
+##### Example:
 Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/template/[template name]`:
 ```js
     let template = result.webTemplate;
