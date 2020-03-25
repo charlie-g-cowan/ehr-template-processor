@@ -21,13 +21,30 @@ describe('padNTabsLeft', function() {
 describe('getting names', function() {
     it('should return empty string if no localizedNames object exists', function() {
         const object = {
-            name: "UCLH Foot and ankle PROMs",
-            localizedName: "UCLH Foot and ankle PROMs",
             localizedDescriptions: {en: "Document to communicate information to others, commonly in response to a request from another party."},
         };
         const language = 'en';
         assert.equal(getLocalizedNameIfExists(object, language), '');
     });
+    it('should use localizedName as fallback for localizedNames', function() {
+        const object = {
+            name: "UCLH Foot and ankle PROMs",
+            localizedName: "UCLH Foot and ankle PROMs1",
+            localizedDescriptions: {en: "Document to communicate information to others, commonly in response to a request from another party."},
+        };
+        const language = 'en';
+        assert.equal(getLocalizedNameIfExists(object, language), 'UCLH Foot and ankle PROMs1');
+    });
+    it('should use name as fallback for localizedNames/localizedName', function() {
+        const object = {
+            name: "UCLH Foot and ankle PROMs2",
+            localizedDescriptions: {en: "Document to communicate information to others, commonly in response to a request from another party."},
+        };
+        const language = 'en';
+        assert.equal(getLocalizedNameIfExists(object, language), 'UCLH Foot and ankle PROMs2');
+    });
+    // TODO: fix this so returns alternative if language not found (maybe, consider whether a better option than
+    //  nothing)
     it('should return empty string if language does not exist within localizedNames', function() {
         const object = {
             name: "UCLH Foot and ankle PROMs",
