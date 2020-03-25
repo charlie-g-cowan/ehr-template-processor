@@ -9,14 +9,18 @@ Simply clone (or add as submodule), and run `npm install`.
 Run `npm test` to run tests, run `npm run-script coverage` to run coverage
 
 ## API
-#### <a id="treeTrawlGettingStructuredInputs">treeTrawlGettingStructuredInputs(tree, language[, parentTrace])</a>
-#####Arguments:
+- [treeTrawlGettingStructuredInputs(tree, language[, parentTrace])](#treeTrawlGettingStructuredInputs)
+- [treeTrawlGettingFlatInputs(tree, language[, parentTrace])](#treeTrawlGettingFlatInputs)
+- [inputToJsonFormInput(tree, language)](#inputToJsonFormInput)
+
+### <a id="treeTrawlGettingStructuredInputs">treeTrawlGettingStructuredInputs(tree, language[, parentTrace])</a>
+##### Arguments:
 1. `tree`: a JSON tree that is the webTemplate property of a response from a get request for a template from a CDR.
 2. `language`:  an ISO language that is supported by that webTemplate e.g. 'en', 'fr'
 3. `aqlTrace` \[optional, rarely used, not reccomended\]: list of the node names that as you go down the tree, so the aql location can be given (e.g. for committing a composition). Defaults to [], only change if you need something prepended before each aql location.
-#####Returns:
+##### Returns:
 A simplified, structured JSON structure for use in generating HTML/React/other input interfaces.
-#####Example:
+##### Example:
 Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/template/[template name]`:
 ```js
     let template = result.webTemplate;
@@ -24,13 +28,13 @@ Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/templat
 ```
 
 #### <a id="treeTrawlGettingFlatInputs">treeTrawlGettingFlatInputs(tree, language[, parentTrace])</a>
-#####Arguments:
+##### Arguments:
 1. `tree`: a JSON tree that is the webTemplate property of a response from a get request for a template from a CDR
 2. `language`:  an ISO language that is supported by that webTemplate e.g. 'en', 'fr'
 3. `aqlTrace` \[optional, rarely used, not reccomended\]: list of the node names that as you go down the tree, so the aql location can be given (e.g. for committing a composition). Defaults to [], only change if you need something prepended before each aql location
-#####Returns:
+##### Returns:
 A simplified, flat JSON structure for use in generating HTML/React/other input interfaces.
-#####Example:
+##### Example:
 Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/template/[template name]`:
 ```js
     let template = result.webTemplate;
@@ -49,11 +53,3 @@ Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/templat
     let template = result.webTemplate;
     const result = inputToJsonFormInput(template.tree, template.defaultLanguage); // returns the inputs associated with the top of the tree
 ```
-
-
-/**
- * convert a tree (with inputs) from a webTemplate into an input, in a json representation
- * @param {*} totalTree
- * @param {*} language
- */
-function inputToJsonFormInput(totalTree, language)
