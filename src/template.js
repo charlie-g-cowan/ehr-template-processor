@@ -230,26 +230,53 @@ function hasChildren(tree) {
 }
 
 /**
- * Trawl recursively through a JSON webTemplate by getting the top level element and seeing whether it has a children
- * element, then iterating through those with the same function, getting flat list of inputs
- * @param {*} tree
- * @param {*} language
- * @param {*} parentTrace
+ * Crawl recursively through a JSON webTemplate by getting the top level element and seeing
+ * whether it has a children element, then iterating through those with the same function, getting flat list of inputs
+ * @param tree
+ * @param language
+ * @param parentTrace
+ * @returns {[]}
  */
-function treeTrawlGettingFlatInputs(tree, language, parentTrace, inputs) {
+function treeTrawlGettingFlatInputs(tree, language, parentTrace) {
+    parentTrace = parentTrace || [];
+    const result1 = [];
+    treeTrawlGettingFlatInputsAux(tree, language, parentTrace, []).map((input) => {
+        result1.push(inputToJsonFormInput(input, language));
+    });
+    return result1;
+}
+
+/**
+ * Helper function to crawl recursively through a JSON webTemplate by getting the top level element and seeing
+ * whether it has a children element, then iterating through those with the same function, getting flat list of inputs
+ * @param tree
+ * @param language
+ * @param parentTrace
+ * @param inputs
+ * @returns {*}
+ */
+function treeTrawlGettingFlatInputsAux(tree, language, parentTrace, inputs) {
     let id = getIdIfExists(tree);
     if (objectHasInputs(tree)) {
         inputs.push({ inputs: tree, aqlTrace: getAqlPathFromParentTrace(parentTrace, id) });
     }
     if (hasChildren(tree)) {
         tree.children.map((childTree) => {
-            inputs.concat(treeTrawlGettingFlatInputs(childTree, language, parentTrace.concat([id]), inputs));
+            inputs.concat(treeTrawlGettingFlatInputsAux(childTree, language, parentTrace.concat([id]), inputs));
         });
     }
     return inputs;
 }
 
+/**
+ * Trawl recursively through a JSON webTemplate by getting the top level element and seeing whether it has a children
+ * element, then iterating through those with the same function, getting a structured list of inputs
+ * @param tree
+ * @param language
+ * @param parentTrace
+ */
 function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
+    parentTrace = parentTrace || [];
     const resultTree = {};
     resultTree.id = tree.id;
     resultTree.name = getLocalizedNameIfExists(tree, language);
