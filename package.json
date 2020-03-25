@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/charlie-g-cowan/ehr-template-processor#readme",
   "devDependencies": {
-    "mocha": "^7.0.1",
+    "mocha": "^7.1.1",
     "nyc": "^15.0.0"
   }
 }
