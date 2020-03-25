@@ -2,12 +2,11 @@
   "name": "ehr-template-processor",
   "version": "0.0.1",
   "description": "",
-  "main": "src/main.js",
+  "main": "src/template.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "start": "node src/main.js",
     "test": "mocha",
     "coverage": "nyc mocha"
   },

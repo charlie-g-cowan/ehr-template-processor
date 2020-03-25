@@ -1,5 +1,5 @@
 /**
- * @file Provides functions for pulling webTemplate and processing it
+ * @file Provides functions for processing webTemplate
  * @author Charlie Cowan <charlie.g.cowan@gmail.com>
  */
 
