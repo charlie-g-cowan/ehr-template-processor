@@ -1,7 +1,7 @@
 {
   "name": "ehr-template-processor",
   "version": "0.0.1",
-  "description": "",
+  "description": "Converter from EHR webTemplate to simplified JSON representation for creating interfaces.",
   "main": "src/template.js",
   "directories": {
     "test": "test"
