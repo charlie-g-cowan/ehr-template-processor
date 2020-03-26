@@ -306,3 +306,4 @@ exports.objectHasInputs = objectHasInputs;
 exports.inputToJsonFormInput = inputToJsonFormInput;
 exports.getAqlPathFromParentTrace = getAqlPathFromParentTrace;
 exports.treeTrawlGettingStructuredInputs = treeTrawlGettingStructuredInputs;
+exports.treeTrawlGettingFlatInputs = treeTrawlGettingFlatInputs;
