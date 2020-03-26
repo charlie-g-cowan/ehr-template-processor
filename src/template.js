@@ -241,7 +241,7 @@ function treeTrawlGettingFlatInputs(tree, language, parentTrace) {
     parentTrace = parentTrace || [];
     const result1 = [];
     treeTrawlGettingFlatInputsAux(tree, language, parentTrace, []).map((input) => {
-        result1.push(inputToJsonFormInput(input, language));
+        result1.push({...inputToJsonFormInput(input, language), aqlPath: input.inputs.aqlPath});
     });
     return result1;
 }
@@ -280,6 +280,7 @@ function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
     const resultTree = {};
     resultTree.id = tree.id;
     resultTree.name = getLocalizedNameIfExists(tree, language);
+    resultTree.aqlPath = tree.aqlPath ? tree.aqlPath : '';
     if (objectHasInputs(tree)) {
         resultTree.inputs =
             inputToJsonFormInput({ inputs: tree, aqlTrace: getAqlPathFromParentTrace(parentTrace, tree.id) }, 'en');
