@@ -11,7 +11,7 @@
  */
 const getObjectPropertyIfExists = (object, propertyName) => {
     return propertyName in object ? object[propertyName] : ''
-}
+};
 
 /**
  * Get the appropriate name for the given language for an object within the template tree, if provided. Otherwise
@@ -20,9 +20,9 @@ const getObjectPropertyIfExists = (object, propertyName) => {
  * @param {*} object
  * @param {*} language
  */
-const getLocalizedNameIfExists = (object, language) => {
+export const getLocalizedNameIfExists = (object, language) => {
     return ("localizedNames" in object) ? (getObjectPropertyIfExists(object.localizedNames, language)) : ('localizedName' in object ? getObjectPropertyIfExists(object, 'localizedName') : getObjectPropertyIfExists(object, 'name'));
-}
+};
 
 /**
  * Get the appropriate description for the given language for an object within the template tree, if provided.
@@ -31,16 +31,16 @@ const getLocalizedNameIfExists = (object, language) => {
  * @param {*} object
  * @param {*} language
  */
-const getLocalizedDescriptionIfExists = (object, language) => {
+export const getLocalizedDescriptionIfExists = (object, language) => {
     return ("localizedDescriptions" in object) ? (getObjectPropertyIfExists(object.localizedDescriptions, language)) : ('localizedDescription' in object ? getObjectPropertyIfExists(object, 'localizedDescriptions') : getObjectPropertyIfExists(object, 'description'));
-}
+};
 
 /**
  * Generate a string that is as many tabs as specified by width (>= 0)
  *
  * @param {*} width Integer greater than or equal to 0
  */
-function padNTabsLeft(width) {
+export function padNTabsLeft(width) {
     let tabString = '';
     for (let i = 0; i < width; i++) {
         tabString += '\t';
@@ -52,7 +52,7 @@ function padNTabsLeft(width) {
  * If the current subtree has an id attribute in the JSON, then return it. Otherwise return empty string.
  * @param {*} tree
  */
-function getIdIfExists(tree) {
+export function getIdIfExists(tree) {
     return getObjectPropertyIfExists(tree, 'id');
 }
 
@@ -73,7 +73,7 @@ function locationInTree(depth, id, name, description, parentTrace) {
  * @param {*} parentTrace
  * @param {*} id
  */
-function getAqlPathFromParentTrace(parentTrace = [], id = '') {
+export function getAqlPathFromParentTrace(parentTrace = [], id = '') {
     return parentTrace.concat([id]).filter((e) => {
         return e != ''
     }).join('/');
@@ -83,7 +83,7 @@ function getAqlPathFromParentTrace(parentTrace = [], id = '') {
  * Return true if an object has an 'inputs' attribute, false otherwise
  * @param {*} object
  */
-function objectHasInputs(object) {
+export function objectHasInputs(object) {
     return 'inputs' in object;
 }
 
@@ -117,7 +117,7 @@ function debugTreeTrawlLogAll(tree, language, depth, parentTrace, inputs) {
  * @param {*} totalTree
  * @param {*} language
  */
-function inputToJsonFormInput(totalTree, language) {
+export function inputToJsonFormInput(totalTree, language) {
     const tree = totalTree.inputs;
     let returnObject = {};
     const modifiers = {}; // Modifiers aren't neccesary but can make interaction easier e.g. ordinals
@@ -237,11 +237,11 @@ function hasChildren(tree) {
  * @param parentTrace
  * @returns {[]}
  */
-function treeTrawlGettingFlatInputs(tree, language, parentTrace) {
+export function treeTrawlGettingFlatInputs(tree, language, parentTrace) {
     parentTrace = parentTrace || [];
     const result1 = [];
     treeTrawlGettingFlatInputsAux(tree, language, parentTrace, []).map((input) => {
-        result1.push({...inputToJsonFormInput(input, language), aqlPath: input.inputs.aqlPath});
+        result1.push({aqlPath: input.inputs.aqlPath, ...inputToJsonFormInput(input, language)});
     });
     return result1;
 }
@@ -255,7 +255,7 @@ function treeTrawlGettingFlatInputs(tree, language, parentTrace) {
  * @param inputs
  * @returns {*}
  */
-function treeTrawlGettingFlatInputsAux(tree, language, parentTrace, inputs) {
+export function treeTrawlGettingFlatInputsAux(tree, language, parentTrace, inputs) {
     let id = getIdIfExists(tree);
     if (objectHasInputs(tree)) {
         inputs.push({ inputs: tree, aqlTrace: getAqlPathFromParentTrace(parentTrace, id) });
@@ -275,7 +275,7 @@ function treeTrawlGettingFlatInputsAux(tree, language, parentTrace, inputs) {
  * @param language
  * @param parentTrace
  */
-function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
+export function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
     parentTrace = parentTrace || [];
     const resultTree = {};
     resultTree.id = tree.id;
@@ -296,14 +296,3 @@ function treeTrawlGettingStructuredInputs(tree, language, parentTrace) {
     }
     return resultTree;
 }
-
-exports.padNTabsLeft = padNTabsLeft;
-exports.treeTrawlGettingFlatInputs = treeTrawlGettingFlatInputs;
-exports.getLocalizedNameIfExists = getLocalizedNameIfExists;
-exports.getLocalizedDescriptionIfExists = getLocalizedDescriptionIfExists;
-exports.getIdIfExists = getIdIfExists;
-exports.objectHasInputs = objectHasInputs;
-exports.inputToJsonFormInput = inputToJsonFormInput;
-exports.getAqlPathFromParentTrace = getAqlPathFromParentTrace;
-exports.treeTrawlGettingStructuredInputs = treeTrawlGettingStructuredInputs;
-exports.treeTrawlGettingFlatInputs = treeTrawlGettingFlatInputs;
