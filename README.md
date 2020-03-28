@@ -1,4 +1,5 @@
 # EHR Template Processor
+[![charlie-g-cowan](https://circleci.com/gh/charlie-g-cowan/ehr-template-processor/tree/master.svg?style=svg)](https://circleci.com/gh/charlie-g-cowan/ehr-template-processor)
 
 This module takes a [webTemplate (in Think!EHR style)](https://gitlab.better.care/better-docs/tools-docs/blob/master/form-specification/form-specification.adoc) of a template based on the openEHR standard, and converts it into simplified JSON that represents the key data needed to represent that template as inputs (e.g. in HTML, in an app).
 
