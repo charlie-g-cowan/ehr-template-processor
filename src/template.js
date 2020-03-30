@@ -56,18 +56,6 @@ export function getIdIfExists(tree) {
     return getObjectPropertyIfExists(tree, 'id');
 }
 
-//TODO: Test this
-/**
- * Log to console the details of the part of the JSON tree currently being processed
- * @param {*} depth
- * @param {*} id
- * @param {*} name
- * @param {*} description
- */
-function locationInTree(depth, id, name, description, parentTrace) {
-    return padNTabsLeft(depth) + id + ': ' + name + ', ' + ', ' + description + ', ' + getAqlPathFromParentTrace(parentTrace, id);
-}
-
 /**
  * Get path to write composition to from parent list and object id
  * @param {*} parentTrace
@@ -86,27 +74,6 @@ export function getAqlPathFromParentTrace(parentTrace = [], id = '') {
 export function objectHasInputs(object) {
     return 'inputs' in object;
 }
-
-/**
- * Trawl recursively through a JSON webTemplate by getitng the top level element and seeing whether it has a children
- * element, then iterating through those with the same function, logging each time
- * @param {*} tree
- * @param {*} language
- * @param {*} depth
- * @param {*} parentTrace
- */
-function debugTreeTrawlLogAll(tree, language, depth, parentTrace, inputs) {
-    let name = getLocalizedNameIfExists(tree, language);
-    let description = getLocalizedDescriptionIfExists(tree, language);
-    let id = getIdIfExists(tree);
-    console.log(locationInTree(depth, id, name, description, parentTrace));
-    if ('children' in tree) {
-        tree.children.map((childTree) => {
-            debugTreeTrawlLogAll(childTree, language, depth + 1, parentTrace, inputs);
-        });
-    }
-}
-
 
 //TODO: ordinals
 //TODO: value descriptions
