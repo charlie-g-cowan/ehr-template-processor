@@ -11,7 +11,7 @@
     "start": "npm run build && npm test",
     "test": "npm run build && cd dist && mocha",
     "coverage": "npm run build && cd dist && nyc mocha",
-    "lint": "npm run build && cd dist && ../node_modules/.bin/eslint ."
+    "lint": "./node_modules/.bin/eslint src && ./node_modules/.bin/eslint test"
   },
   "repository": {
     "type": "git",
