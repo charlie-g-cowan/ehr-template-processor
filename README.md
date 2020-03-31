@@ -8,7 +8,20 @@ This module takes a [webTemplate (in Think!EHR style)](https://gitlab.better.car
 Simply clone (or add as submodule), and run `npm install`.
 
 ## Tests
-Run `npm test` to run tests, run `npm run-script coverage` to run coverage
+To run tests:
+ ```js
+npm test
+ ```
+
+To run coverage:
+```js
+npm run coverage
+```
+
+To run linting:
+```js
+npm run lint
+```
 
 ## API
 - [treeTrawlGettingStructuredInputs(tree, language[, parentTrace])](#treeTrawlGettingStructuredInputs)
@@ -55,3 +68,11 @@ Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/templat
     let template = result.webTemplate;
     const result = inputToJsonFormInput(template.tree, template.defaultLanguage); // returns the inputs associated with the top of the tree
 ```
+
+## Author
+
+- [Charlie Cowan](https://github.com/charlie-g-cowan)
+
+## License
+
+Licensed under the MIT License. See LICENSE for more details.
