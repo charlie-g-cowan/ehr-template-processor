@@ -35,7 +35,7 @@ $ npm run lint
 ##### Arguments:
 1. `tree`: a JSON tree that is the webTemplate property of a response from a get request for a template from a CDR.
 2. `language`:  an ISO language that is supported by that webTemplate e.g. 'en', 'fr'
-3. `aqlTrace` \[optional, rarely used, not reccomended\]: list of the node names that as you go down the tree, so the aql location can be given (e.g. for committing a composition). Defaults to [], only change if you need something prepended before each aql location.
+3. `aqlTrace` \[optional, rarely used, not recommended\]: list of the node names that as you go down the tree, so the aql location can be given (e.g. for committing a composition). Defaults to [], only change if you need something prepended before each aql location.
 ##### Returns:
 A simplified, structured JSON structure for use in generating HTML/React/other input interfaces.
 ##### Example:
@@ -49,7 +49,7 @@ Let `result` be the body/data of a successful call to `[cdr url]/rest/v1/templat
 ##### Arguments:
 1. `tree`: a JSON tree that is the webTemplate property of a response from a get request for a template from a CDR
 2. `language`:  an ISO language that is supported by that webTemplate e.g. 'en', 'fr'
-3. `aqlTrace` \[optional, rarely used, not reccomended\]: list of the node names that as you go down the tree, so the aql location can be given (e.g. for committing a composition). Defaults to [], only change if you need something prepended before each aql location
+3. `aqlTrace` \[optional, rarely used, not recommended\]: list of the node names that as you go down the tree, so the aql location can be given (e.g. for committing a composition). Defaults to [], only change if you need something prepended before each aql location
 ##### Returns:
 A simplified, flat JSON structure for use in generating HTML/React/other input interfaces.
 ##### Example:
